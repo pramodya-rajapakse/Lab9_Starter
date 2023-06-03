@@ -183,6 +183,53 @@
       consoleTraceButton.addEventListener("click", (e) => {
         console.trace();
       });
+
+      try {
+        if (courses.length != 4) {
+          throw new Error("This is an Error");
+        }
+        let fourthCourse = courses[3];
+        console.log(fourthCourse.number);
+
+      } catch (err) {
+        console.error("Within catch statement");
+      } finally {
+        console.log("Within finally statement");
+      }
+
+      class ArrayError extends Error {
+        constructor(message) {
+          super(message);
+          this.name = "ArrayError";
+        }
+      }
+
+      function test() {
+        throw new ArrayError("Array Error Demo");
+      }
+
+      try {
+        test();
+      } catch(err) {
+        console.error(err.message);
+        console.error(err.name); 
+      }
+
+      
+      window.onerror = function(event, source, lineno, colno, error) {
+        console.log("Global Error Demo:" + event);
+        console.log("Source: " + source);
+      };
+
+      function divide(a, b) {
+        if (b === 0) {
+          throw new Error("Cannot divide by zero");
+        }
+        return a / b;
+      }
+
+      divide(5, 0);
+      
     </script>
   </body>
 </html>
